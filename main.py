@@ -5,9 +5,8 @@ folder_path = "LFIDocs"
 #knowledge.upload_pdfs_to_pinecone(folder_path)
 
 # Set up the title of the app
-st.title('Legal AI App')
-with st.sidebar:
-    uploaded_file = st.file_uploader("Choose a PDF file to upload", type=['pdf'])
+st.title('Legal Formats India AI')
+
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -18,7 +17,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("Hello! Ask me an arbitration related question"):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
