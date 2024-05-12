@@ -26,6 +26,5 @@ if prompt := st.chat_input("Hello! Ask me an arbitration related question"):
 
     with st.chat_message("assistant"):
         stream, urls = backend.get_answer(prompt)
-        print(urls)
-        response = st.write(stream + "\n" + urls)
+        response = st.write(stream)
         st.session_state.messages.append({"role": "assistant", "content": stream})
