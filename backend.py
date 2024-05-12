@@ -54,7 +54,7 @@ def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-
 
 def get_answer(query):
     url_list = ''
-    query = query +" provide case names and dates in text if the question is a legal one. Otherwise use the regular model without retrived context"
+    query = query +" Provide case names and dates in text if the question is a legal one. Otherwise use the regular model without retrived context"
     print('Querying:')
     print(query)
     response = retrieveAndGenerate(query, os.getenv('KBID'), model_id=model_id, region_id=region_id)
