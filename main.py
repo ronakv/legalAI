@@ -5,7 +5,7 @@ folder_path = "LFIDocs"
 #knowledge.upload_pdfs_to_pinecone(folder_path)
 
 # Set up the title of the app
-st.title('Legal Robot')
+st.title('Indian Arbitration Robot')
 
 
 # Initialize chat history
