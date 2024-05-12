@@ -1,6 +1,4 @@
 import streamlit as st
-import pdfplumber
-import cohere
 import backend
 
 folder_path = "LFIDocs"
