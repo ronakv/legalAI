@@ -53,6 +53,7 @@ def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-
 
 
 def get_answer(query):
+    url_list = ''
     query = query +" provide case names and dates in text if the question is a legal one. Otherwise use the regular model without retrived context"
     print('Querying:')
     print(query)
@@ -79,4 +80,5 @@ def get_answer(query):
     # Print all the generated S3 URLs
     for url in s3_urls:
         url_list = url + "\n"
+
     return response['output']['text'], url_list

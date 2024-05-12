@@ -27,5 +27,6 @@ if prompt := st.chat_input("What is up?"):
 
     with st.chat_message("assistant"):
         stream, urls = backend.get_answer(prompt)
+        print(urls)
         response = st.write(stream + "\n" + urls)
         st.session_state.messages.append({"role": "assistant", "content": stream})
