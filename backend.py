@@ -16,7 +16,7 @@ boto3_session = boto3.session.Session(
 )
 region_name = boto3_session.region_name
 
-model_id = "anthropic.claude-3-sonnet-20240229-v1:0"  # For testing with Claude Instant and Claude V2
+model_id = "cohere.command-r-plus-v1:0"  # For testing with Claude Instant and Claude V2
 region_id = region_name
 
 
