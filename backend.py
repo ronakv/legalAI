@@ -20,7 +20,7 @@ model_id = "cohere.command-r-plus-v1:0"  # For testing with Claude Instant and C
 region_id = region_name
 
 
-def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-3-sonnet-20240229-v1:0",
+def retrieveAndGenerate(input, kbId, sessionId=None, model_id="cohere.command-r-plus-v1:0",
                         region_id="us-west-2"):
     model_arn = f'arn:aws:bedrock:{region_id}::foundation-model/{model_id}'
     if sessionId:
