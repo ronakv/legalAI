@@ -32,7 +32,7 @@ bedrock_agent_runtime = boto3.client(
 )
 
 
-def retrieve(query, kbId, numberOfResults=5):
+def retrieve(query, kbId, numberOfResults=20):
     return bedrock_agent_runtime.retrieve(
         retrievalQuery={
             'text': query
