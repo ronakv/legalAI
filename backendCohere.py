@@ -60,7 +60,7 @@ def get_answer(query):
         message=query,
         documents=documents)
 
-    pp.pprint(response.citations)
+    title = response.documents[0].title
 
-    return response.text
+    return response.text + " " + title
 
