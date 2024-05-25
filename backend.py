@@ -21,29 +21,6 @@ region_name = boto3_session.region_name
 model_id = "anthropic.claude-3-sonnet-20240229-v1:0"  # For testing with Claude Instant and Claude V2
 region_id = region_name
 
-bedrock_agent_runtime = boto3.client(
-    service_name="bedrock-agent-runtime"
-)
-
-
-def retrieve(query, kbId, numberOfResults=5):
-    return bedrock_agent_runtime.retrieve(
-        retrievalQuery={
-            'text': query
-        },
-        knowledgeBaseId=kbId,
-        retrievalConfiguration={
-            'vectorSearchConfiguration': {
-                'numberOfResults': numberOfResults
-            }
-        }
-    )
-
-
-response3 = retrieve("Are two kartas legal", "AES9P3MT9T")["retrievalResults"]
-
-print(response3)
-
 
 def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-3-sonnet-20240229-v1:0",
                         region_id="us-west-2"):
