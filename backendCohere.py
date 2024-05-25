@@ -7,7 +7,7 @@ import helpers
 import json
 import cohere
 
-co = cohere.Client(api_key=os.getenv("COHERE_API_KEY"))
+co = cohere.Client(api_key=os.getenv('COHERE_API_KEY'))
 
 load_dotenv()
 
@@ -47,7 +47,6 @@ def retrieve(query, kbId, numberOfResults=20):
 
 
 def get_answer(query):
-
     query = "You are a Legal Assistant Helping lawyers do their research. Provide comprehensive answers citing cases " \
             "from the documents as far as possible." + query
 
@@ -60,7 +59,18 @@ def get_answer(query):
         message=query,
         documents=documents)
 
-    title = response.documents[0].title
+    sources = ""
+    prev_title = "Sources:"
+    for document in response.documents:
 
-    return response.text + " " + title
+        if helpers.format_s3_url(document["title"]) != prev_title:
+
+            sources += "\n" + helpers.format_s3_url(document["title"])
+
+            prev_title = helpers.format_s3_url(document["title"])
+
+    answer = response.text + sources
+
+    return answer
+
 
