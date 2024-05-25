@@ -60,4 +60,13 @@ def get_answer(query):
         message=query,
         documents=documents)
 
-    return response.text
+    document_titles = []
+    for citation in response["citations"]:
+        for doc in response["documents"]:
+            if doc["id"] in citation["document_ids"]:
+                document_titles.append(doc["title"])
+
+    # Combine response text with document titles
+    result_string = response.text + "\nTitles:\n" + "\n".join(document_titles)
+
+    return result_string
