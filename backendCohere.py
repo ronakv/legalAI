@@ -59,8 +59,8 @@ def get_answer(query):
         message=query,
         documents=documents)
 
-    sources = ""
-    prev_title = "Sources:"
+    sources = "Sources: \n"
+    prev_title = ""
     for document in response.documents:
 
         if helpers.format_s3_url(document["title"]) != prev_title:
