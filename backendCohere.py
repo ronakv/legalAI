@@ -40,7 +40,9 @@ def retrieve(query, kbId, numberOfResults=20):
         knowledgeBaseId=kbId,
         retrievalConfiguration={
             'vectorSearchConfiguration': {
-                'numberOfResults': numberOfResults
+                'numberOfResults': numberOfResults,
+                'overRideSearchType': 'SEMANTIC'
+
             }
         }
     )
