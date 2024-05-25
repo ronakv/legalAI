@@ -2,6 +2,7 @@ import boto3
 from botocore.client import Config
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
 # comments
@@ -20,6 +21,29 @@ region_name = boto3_session.region_name
 model_id = "anthropic.claude-3-sonnet-20240229-v1:0"  # For testing with Claude Instant and Claude V2
 region_id = region_name
 
+bedrock_agent_runtime = boto3.client(
+    service_name="bedrock-agent-runtime"
+)
+
+
+def retrieve(query, kbId, numberOfResults=5):
+    return bedrock_agent_runtime.retrieve(
+        retrievalQuery={
+            'text': query
+        },
+        knowledgeBaseId=kbId,
+        retrievalConfiguration={
+            'vectorSearchConfiguration': {
+                'numberOfResults': numberOfResults
+            }
+        }
+    )
+
+
+response3 = retrieve("Are two kartas legal", "AES9P3MT9T")["retrievalResults"]
+
+print(response3)
+
 
 def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-3-sonnet-20240229-v1:0",
                         region_id="us-west-2"):
@@ -33,7 +57,17 @@ def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-
                 'type': 'KNOWLEDGE_BASE',
                 'knowledgeBaseConfiguration': {
                     'knowledgeBaseId': os.getenv('KBID'),
-                    'modelArn': model_arn
+                    "retrievalConfiguration": {
+                        "vectorSearchConfiguration": {
+                            "numberOfResults": 10
+                        }
+                    },
+                    'modelArn': model_arn,
+                    "inferenceConfig": {
+                        "textInferenceConfig": {
+                            "maxTokens": 10000
+                        }
+                    }
                 }
             },
             sessionId=sessionId
@@ -55,7 +89,7 @@ def retrieveAndGenerate(input, kbId, sessionId=None, model_id="anthropic.claude-
 
 def get_answer(query):
     url_list = ''
-    query = query +" Provide case names and dates in text if the question is a legal one. Otherwise use the regular model without retrived context"
+    query = query + " Provide case names and dates in text if the question is a legal one. Otherwise use the regular model without retrived context"
     print('Querying:')
     print(query)
     response = retrieveAndGenerate(query, os.getenv('KBID'), model_id=model_id, region_id=region_id)
