@@ -26,6 +26,7 @@ if prompt := st.chat_input("Hello! Ask me an arbitration related question"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
+
         stream = backendCohere.get_answer(prompt)
         response = st.write(stream)
         st.session_state.messages.append({"role": "assistant", "content": stream})
