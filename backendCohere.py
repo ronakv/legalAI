@@ -41,7 +41,7 @@ def retrieve(query, kbId, numberOfResults=20):
         retrievalConfiguration={
             'vectorSearchConfiguration': {
                 'numberOfResults': numberOfResults,
-                'overRideSearchType': 'SEMANTIC'
+                'overrideSearchType': 'SEMANTIC'
 
             }
         }
